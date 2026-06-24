@@ -1,10 +1,22 @@
 # Predixion Obsidian Sync — MVP
 
-A working build of a subset of the Obsidian Intelligence System described in
-`Obsidian_Intelligence_System.pdf` (sections 3–6), built from an outsider's
-vantage point without access to Predixion's actual tools or client data.
+This is a job-assignment submission for Predixion AI: a working build of a
+subset of the "Obsidian Intelligence System" internal build plan (a two-vault,
+Obsidian-based knowledge system for tracking BFSI clients and BD pipeline),
+built from an outsider's vantage point without access to Predixion's actual
+tools or client data.
 
-This is **not** a full implementation of the brief. Per HR's guidance, this
+Two things live in this repo:
+- **This technical build** — real sync scripts, a populated Obsidian vault,
+  a skill library. Documented below.
+- **[`Chinmay_Predixion_Obsidian_Opinion.md`](Chinmay_Predixion_Obsidian_Opinion.md)**
+  — a separate written opinion on the brief's local-first architecture versus
+  two alternative stacks (xysq.ai, a Hermes-style AI-employee setup), and on
+  scaling past markdown-file orchestration. Not part of the build — a
+  standalone architectural take.
+
+The build below covers a subset of the brief's sections 3–6. This is **not**
+a full implementation. Per HR's guidance, this
 assignment is judged on approach and thinking, not completion — building the
 real system requires Predixion's actual Outlook/Azure AD, HubSpot, and Slack
 access, and real client data, none of which an outside candidate has. What
@@ -24,7 +36,7 @@ explicitly rather than glossed over.
 | `daily_brief.py`                                                         | Built, runs all syncs and generates the brief. Slack push replaced by a real email send (see below)                                                             |
 | Vault 2 — Demand Gen / BD                                                | **Not built.** See "What's deliberately out of scope"                                                                                                           |
 | Dataview dashboards (section 4.4)                                        | Built — `Dashboard.md`, live queries, verified rendering in real Obsidian                                                                                       |
-| Obsidian plugins (Dataview, Templater, Obsidian Git, QuickAdd, Calendar) | Installed and enabled. Templater/QuickAdd/Obsidian Git are wired but not exercised end-to-end (no real client onboarding flow or GitHub remote to test against) |
+| Obsidian plugins (Dataview, Templater, Obsidian Git, QuickAdd, Calendar) | Dataview, Obsidian Git, QuickAdd, and Calendar installed and enabled. Templater's files are present but disabled — its template-on-create flow wasn't exercised against a real client onboarding, so it's left off rather than claimed as working |
 | Skill Library (section 8) | Partially built — see `/skill-library` |
 
 ![Obsidian Dashboard with live Dataview tables](Screenshot_Obsidian_Dashboard.png)
@@ -207,7 +219,7 @@ call participant's email domain isn't in `DOMAIN_TO_CLIENT` (or
 - **Gmail OAuth errors:** delete `token.json` and re-run to force a fresh
 browser approval — usually means the cached token expired or scopes
 changed.
-- `**python-frontmatter` import error on Python 3.9:** version 1.2.0+ needs
+- **`python-frontmatter` import error on Python 3.9:** version 1.2.0+ needs
 `typing.TypeGuard`, unavailable pre-3.10. This repo pins `1.0.0` in
 `requirements.txt`, which doesn't have that problem.
 
