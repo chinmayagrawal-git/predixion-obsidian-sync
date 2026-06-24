@@ -1,0 +1,11 @@
+{
+  "commitMessage": "auto: vault sync {{date}}",
+  "commitDateFormat": "YYYY-MM-DD HH:mm:ss",
+  "autoSaveInterval": 30,
+  "autoPullInterval": 0,
+  "autoPushInterval": 0,
+  "disablePush": true,
+  "pullBeforePush": false,
+  "syncMethod": "merge",
+  "showStatusBar": true
+}

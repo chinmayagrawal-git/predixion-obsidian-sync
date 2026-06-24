@@ -1,0 +1,10 @@
+{
+  "enableJavascriptQueries": true,
+  "enableInlineDataviewJs": true,
+  "enableDataviewJs": true,
+  "refreshEnabled": true,
+  "refreshInterval": 2500,
+  "tableIdColumnName": "File",
+  "tableGroupColumnName": "Group",
+  "warnOnEmptyResult": true
+}

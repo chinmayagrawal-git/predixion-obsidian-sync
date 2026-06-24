@@ -1,0 +1,42 @@
+{
+  "data": {
+    "transcripts": [
+      {
+        "id": "tx_aroha_0610",
+        "title": "Aroha Finance - KOLLECT Monthly Review",
+        "date": "2026-06-10",
+        "duration": 28,
+        "participants": [
+          { "email": "chinmay@predixion.ai", "name": "Chinmay (Predixion)" },
+          { "email": "rohit.mehta@arohafinance.in", "name": "Rohit Mehta" }
+        ],
+        "summary": {
+          "overview": "Reviewed DPD 30-60 recovery performance, currently at 41%. Rohit flagged the voice agent's escalation threshold as too conservative, missing accounts that should route to a human agent sooner.",
+          "action_items": [
+            "Predixion to review escalation threshold logic",
+            "Share updated threshold proposal before June 28 review"
+          ]
+        },
+        "transcript_url": "https://app.fireflies.ai/view/tx_aroha_0610"
+      },
+      {
+        "id": "tx_lighthouse_0609",
+        "title": "Lighthouse Capital - UAT Check-in",
+        "date": "2026-06-09",
+        "duration": 22,
+        "participants": [
+          { "email": "chinmay@predixion.ai", "name": "Chinmay (Predixion)" },
+          { "email": "anjali.rao@lighthousecapital.in", "name": "Anjali Rao" }
+        ],
+        "summary": {
+          "overview": "UAT progressing on first-touch reminder calls, connect rate at 58%. Sign-off is blocked on legal's review of the call disclosure script, expected by June 18.",
+          "action_items": [
+            "Anjali to chase legal review status internally",
+            "Predixion to send finalized disclosure script wording for legal's reference"
+          ]
+        },
+        "transcript_url": "https://app.fireflies.ai/view/tx_lighthouse_0609"
+      }
+    ]
+  }
+}

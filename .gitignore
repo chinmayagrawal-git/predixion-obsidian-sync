@@ -1,0 +1,14 @@
+# Real secrets — never commit. See .env.example for the template.
+.env
+credentials.json
+token.json
+
+# OS / editor noise
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+
+# Obsidian — workspace state is local-machine-specific, not vault content
+Vault1-ClientIntelligence/.obsidian/workspace.json
