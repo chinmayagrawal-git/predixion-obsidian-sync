@@ -4,5 +4,5 @@
 TASK
 FROM "Clients"
 WHERE !completed
-GROUP BY file.link
+GROUP BY link(file.link, client) AS Client
 ```
