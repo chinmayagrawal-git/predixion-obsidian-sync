@@ -103,9 +103,34 @@ real KOLLECT/VOIZ deployment specifics (data table formats, escalation flow
 details, Predixion's actual brand tone docs) that an outside candidate
 doesn't have. Built `/transcript-analysis`, `/email-draft`, `/intern-brief`,
 and `/proposal` instead — see `skill-library/`, none of these require
-insider data to be done in good faith.
+insider data to be done in good faith. One honest caveat on the four that
+were built: I don't actually know how Predixion wants its voice to sound
+(tone, formality, house style) — these templates make a reasonable generic
+guess at "professional enterprise BFSI vendor," not a match to a real brand
+voice doc. Treat them as a starting structure to adjust, not a finished
+deliverable.
+
+## Proof of concept: the pattern generalizes beyond BFSI
+
+`ProofOfConcept-Personal/Contacts/Anurag-Acharya/Overview.md` is a real,
+deliberately separate entity outside the BFSI client vault — same file
+pattern (frontmatter, Call Log, contact-level routing), but for a personal
+contact instead of a client. It exists to prove `fireflies_sync.py`'s
+matching logic generalizes past domain-based BFSI routing: personal contacts
+on shared providers (gmail.com) can't be matched by domain the way
+`arohafinance.in` can, since gmail.com isn't a single entity. `fireflies_sync.py`
+handles this via a separate `EMAIL_TO_CLIENT` dict (exact-email match,
+checked before the domain-based `DOMAIN_TO_CLIENT` fallback) — see
+`fireflies_sync.py` lines 30–34. The real transcript content used here was
+redacted of third-party names and verbatim detail before being committed;
+see the file's Call Log entry for what's actually retained.
 
 ## Setup
+
+`.env`, `credentials.json`, and `token.json` are intentionally not in this
+repo — they're real secrets, excluded via `.gitignore`. If you don't see them
+in the file list, that's by design, not a missing file. Get your own per the
+steps below.
 
 ### 1. Install dependencies
 
