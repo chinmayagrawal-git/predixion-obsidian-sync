@@ -19,7 +19,7 @@ tags:
 Housing finance company, Bangalore. UAT on KOLLECT, evaluating before full rollout across their DPD 0-60 reminder workflows.
 
 ## Deployment Status
-- Product: KOLLECT
+- Product: [[KOLLECT]]
 - Stage: UAT
 - Key metric: connect rate on first-touch reminder calls
 - Last reported performance: 2026-06-07, 58% connect rate

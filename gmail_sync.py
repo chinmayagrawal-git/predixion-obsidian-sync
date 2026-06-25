@@ -65,12 +65,42 @@ def get_message_detail(service, msg_id):
     ).execute()
     headers = {h["name"]: h["value"] for h in msg["payload"]["headers"]}
     return {
+        "id": msg_id,
         "from": headers.get("From", ""),
         "to": headers.get("To", ""),
         "subject": headers.get("Subject", ""),
         "date": headers.get("Date", ""),
         "snippet": msg.get("snippet", ""),
     }
+
+
+def vault_link(file_path):
+    rel = os.path.relpath(file_path, VAULT1).replace(os.sep, "/")
+    return rel[:-3] if rel.endswith(".md") else rel
+
+
+def write_email_file(file_path, detail, entry):
+    """Mirrors the doc's section 4.1 folder structure (Emails/ subfolder per
+    client). Linked back to the client file via wikilink for graph view."""
+    client_dir = os.path.dirname(file_path)
+    emails_dir = os.path.join(client_dir, "Emails")
+    os.makedirs(emails_dir, exist_ok=True)
+    out_path = os.path.join(emails_dir, f"{datetime.now().strftime('%Y-%m-%d')}-{detail['id']}.md")
+    if os.path.exists(out_path):
+        return False
+
+    client_name = frontmatter.load(file_path).get("client", "")
+    link_target = vault_link(file_path)
+    content = (
+        f"---\n"
+        f'client: "[[{link_target}|{client_name}]]"\n'
+        f"type: email\n"
+        f"---\n"
+        f"{entry.lstrip(chr(10))}"
+    )
+    with open(out_path, "w") as f:
+        f.write(content)
+    return True
 
 
 def match_client_file(detail):
@@ -113,7 +143,9 @@ def run():
         if file_path is None:
             unmatched.append(detail["subject"])
             continue
-        append_to_email_log(file_path, format_email_entry(detail))
+        entry = format_email_entry(detail)
+        append_to_email_log(file_path, entry)
+        write_email_file(file_path, detail, entry)
         synced += 1
 
     return {"synced": synced, "unmatched_count": len(unmatched), "total_checked": len(messages)}

@@ -19,7 +19,7 @@ tags:
 Mid-size NBFC, Pune. Live on KOLLECT since Q1 2026, focused on pre-90-day recovery on the DPD 30-60 bucket.
 
 ## Deployment Status
-- Product: KOLLECT
+- Product: [[KOLLECT]]
 - Stage: Live
 - Key metric: recovery rate on DPD 30-60 bucket
 - Last reported performance: 2026-06-05, 41% recovery on DPD 30-60

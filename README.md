@@ -82,6 +82,34 @@ scalar array) throws a real `400 Bad Request`. `fireflies_sync.py`'s
 `normalize_`* functions handle both shapes, so the mock and the live API run
 through identical downstream logic. See `fireflies_sync.py` lines 68–102.
 
+## A spec inconsistency: folder structure vs. append format
+
+Worth flagging on its own. Section 4.1's folder structure shows each client
+folder with `Overview.md`, `Calls/`, and `Emails/` subfolders, implying one
+file per call/email. But section 6.1/6.2's append-format examples write call
+and email summaries as `### Call —` / `### Email —` entries inside
+`Overview.md`'s `## Call Log` / `## Email Log` sections — no separate files.
+The two sections of the doc don't agree with each other.
+
+Both are now honored: `fireflies_sync.py` and `gmail_sync.py` still append
+to `Overview.md` per the section 6.1/6.2 format, and additionally write a
+standalone file per call/email into `Calls/`/`Emails/` per the section 4.1
+folder structure. Each standalone file links back to its client's
+`Overview.md` via a wikilink in frontmatter (`client: "[[...]]"`), so the
+relationship shows up as a real edge in Obsidian's Graph view — a plain
+frontmatter string wouldn't render as one.
+
+## Graph view: client-to-product links
+
+Frontmatter `products:` lists are plain strings, useful for Dataview's
+`contains()` filters but invisible to Graph view — Obsidian only draws edges
+from real `[[wikilinks]]` written in file content, not from Dataview query
+results or frontmatter strings. Each client's `## Deployment Status` section
+now also links the product as `[[KOLLECT]]`, so Graph view shows the actual
+client ↔ product relationships the brief's section 1.3 calls out
+("visual map of relationships between clients, products, issues, and
+prospects") instead of an empty graph of disconnected client nodes.
+
 ## What's deliberately out of scope
 
 - **Vault 2 (Demand Gen/BD) and `hubspot_sync.py`.** This requires real

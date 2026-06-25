@@ -132,6 +132,39 @@ def format_call_entry(transcript):
     )
 
 
+def vault_link(file_path):
+    rel = os.path.relpath(file_path, VAULT1).replace(os.sep, "/")
+    return rel[:-3] if rel.endswith(".md") else rel
+
+
+def write_call_file(file_path, transcript, entry):
+    """Mirrors the doc's section 4.1 folder structure (Calls/ subfolder per
+    client), which the Overview.md append alone doesn't satisfy. Linked back
+    to the client file via wikilink so Obsidian's graph view shows the edge
+    (section 1.3) — a frontmatter string wouldn't render as a graph node."""
+    client_dir = os.path.dirname(file_path)
+    calls_dir = os.path.join(client_dir, "Calls")
+    os.makedirs(calls_dir, exist_ok=True)
+    call_date = normalize_date(transcript)
+    out_path = os.path.join(calls_dir, f"{call_date}-{transcript['id']}.md")
+    if os.path.exists(out_path):
+        return False
+
+    client_name = frontmatter.load(file_path).get("client", "")
+    link_target = vault_link(file_path)
+    content = (
+        f"---\n"
+        f'client: "[[{link_target}|{client_name}]]"\n'
+        f"date: {call_date}\n"
+        f"type: call\n"
+        f"---\n"
+        f"{entry.lstrip(chr(10))}"
+    )
+    with open(out_path, "w") as f:
+        f.write(content)
+    return True
+
+
 def append_to_call_log(file_path, entry, contact_date, transcript_id):
     post = frontmatter.load(file_path)
     if f"<!-- id:{transcript_id} -->" in post.content:
@@ -161,10 +194,10 @@ def run():
         if file_path is None:
             unmatched.append(t["title"])
             continue
-        was_new = append_to_call_log(
-            file_path, format_call_entry(t), normalize_date(t), t["id"]
-        )
+        entry = format_call_entry(t)
+        was_new = append_to_call_log(file_path, entry, normalize_date(t), t["id"])
         if was_new:
+            write_call_file(file_path, t, entry)
             synced += 1
 
     return {"synced": synced, "unmatched": unmatched, "transcripts": transcripts}
