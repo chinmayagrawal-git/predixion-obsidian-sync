@@ -47,5 +47,11 @@ Mid-size NBFC, Pune. Live on KOLLECT since Q1 2026, focused on pre-90-day recove
 ## Email Log
 <!-- gmail_sync.py appends here -->
 
+### Email — 2026-06-12 09:14
+- **From:** Rohit Mehta <rohit.mehta@arohafinance.in>
+- **Subject:** RE: KOLLECT Performance Review — June
+- **Preview:** Sharing the updated escalation threshold proposal ahead of the June 28 review. Let me know if a quick call before then works on your end, want to walk through the new...
+- **Logged:** 2026-06-24 16:01 (auto)
+
 ## Next Action
 - [ ] Review escalation threshold with Rohit before June 28 review
